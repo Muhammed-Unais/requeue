@@ -1,0 +1,63 @@
+import 'dart:convert';
+import 'dart:developer';
+import 'dart:io';
+import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
+import 'package:requeue/data/app_exceptions.dart';
+import 'package:requeue/data/network/base_api_service.dart';
+
+class NetWorkApiService implements BaseApiService {
+  @override
+  Future getGetApiResponse(String url, String queries) async {}
+
+  @override
+  Future getPostApiResponse(String url, body) async {
+    Response? response;
+    try {
+      var jsonbody = jsonEncode(body);
+
+      response = await http.post(
+        Uri.parse(url),
+        body: jsonbody,
+        headers: {HttpHeaders.contentTypeHeader: "application/json"},
+      );
+
+      Map<String, dynamic>? data = returnResponse(response);
+      return data;
+    } catch (e) {
+      log(e.toString());
+      rethrow;
+    }
+  }
+
+  dynamic returnResponse(Response? response) {
+    if (response != null) {
+      dynamic message;
+
+      var body = jsonDecode(response.body) as Map<String, dynamic>;
+
+      if (body.containsKey("message")) {
+        message = body["message"];
+      }
+
+      switch (response.statusCode) {
+        case 200:
+          return body;
+        case 400:
+          throw BadRequestException(message, response.statusCode);
+        case 401:
+          throw UnauthorisedException(message, response.statusCode);
+        case 403:
+          throw UnauthorisedException(message, response.statusCode);
+        case 500:
+          throw FetchDataException('Something went wrong', response.statusCode);
+        default:
+          throw FetchDataException(message, response.statusCode);
+      }
+    } else {
+      throw FetchDataException(
+        'No internet connection',
+      );
+    }
+  }
+}

@@ -8,7 +8,7 @@ class SignupFormField extends StatelessWidget {
     this.prefixWidget,
     this.hintText,
     this.hintStyle,this.textInputType,
-    this.obscureText =false,
+    this.obscureText =false, this.controller, this.validator,
   });
 
   final String labelText;
@@ -18,10 +18,14 @@ class SignupFormField extends StatelessWidget {
   final TextStyle? hintStyle;
   final TextInputType? textInputType;
   final bool obscureText;
+  final TextEditingController? controller;
+  final String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      validator: validator,
+      controller: controller,
       keyboardType: textInputType,
       obscureText: obscureText,
       decoration: InputDecoration(

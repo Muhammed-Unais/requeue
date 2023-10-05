@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:requeue/features/auth/view_model/auth_view_model.dart';
 import 'package:requeue/res/components/auth_buttons.dart';
 import 'package:requeue/res/constants/app_colors.dart';
 
@@ -80,7 +82,21 @@ class _AgreementAndSubmitButtonState extends State<AgreementAndSubmitButton> {
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: AuthButton(
                   text: "Sign up",
-                  onPressed: isCheck ? () {} : null,
+                  onPressed: isCheck
+                      ? () {
+                          var authViewModelProvider =
+                              context.read<AuthViewmodelProvider>();
+                          var isValid = authViewModelProvider
+                              .formKey.currentState!
+                              .validate();
+                          if (!isValid ||
+                              authViewModelProvider.countryPhoneCode == null) {
+                            return;
+                          } else {
+                            authViewModelProvider.signUpPostApi(context);
+                          }
+                        }
+                      : null,
                 ),
               );
             },
