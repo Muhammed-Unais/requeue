@@ -35,7 +35,7 @@ class _PhoneNumberFormFieldState extends State<PhoneNumberFormField> {
   @override
   Widget build(BuildContext context) {
     return SignupFormField(
-      validator: SignupValidation.phoneNumber,
+      validator: AuthValidation.phoneNumber,
       controller: widget.controller,
       textInputType: TextInputType.number,
       labelText: "phone",

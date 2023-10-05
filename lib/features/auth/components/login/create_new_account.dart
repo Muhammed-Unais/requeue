@@ -10,32 +10,35 @@ class CreateNewAccount extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        var authViewProvider = context.read<AuthViewmodelProvider>();
-        Navigator.pushNamed(context, RoutesNames.siguproute,
-            arguments: authViewProvider);
-      },
-      child: RichText(
-        overflow: TextOverflow.clip,
-        text: const TextSpan(
-          text: "You dont't have an account yet ! ",
-          style: TextStyle(
-            fontSize: 14,
-            color: Colors.white,
-            fontFamily: "Inter",
-          ),
-          children: [
-            TextSpan(
-              text: "Sign in",
-              style: TextStyle(
-                fontSize: 18,
-                color: Colors.white,
-                decoration: TextDecoration.underline,
-                fontFamily: "Inter",
-              ),
+    return Align(
+      alignment: Alignment.center,
+      child: GestureDetector(
+        onTap: () {
+          var authViewProvider = context.read<AuthViewmodelProvider>();
+          Navigator.pushNamed(context, RoutesNames.siguproute,
+              arguments: authViewProvider);
+        },
+        child: RichText(
+          overflow: TextOverflow.clip,
+          text: const TextSpan(
+            text: "You dont't have an account yet ! ",
+            style: TextStyle(
+              fontSize: 14,
+              color: Colors.white,
+              fontFamily: "Inter",
             ),
-          ],
+            children: [
+              TextSpan(
+                text: "Sign in",
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.white,
+                  decoration: TextDecoration.underline,
+                  fontFamily: "Inter",
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

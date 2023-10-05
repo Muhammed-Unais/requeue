@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:requeue/data/network/network_api_service.dart';
@@ -60,9 +61,28 @@ class AuthViewmodelProvider with ChangeNotifier {
     authRepo.signupPostApi(body).then((value) {
       _setJwtToken(value.token);
       _setClientId(value.user?.clientId.toString());
-      Navigator.pushNamed(context, RoutesNames.homeroute);
+
+      clearAllFields();
+
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        RoutesNames.homeroute,
+        (route) => false,
+      );
     }).onError((error, stackTrace) {
       // snackbar
+    });
+  }
+
+  Future loginApi(Map<String, dynamic> data, BuildContext context) async {
+    authRepo.loginPostApi(data).then((value) {
+      _setJwtToken(value.token);
+      _setClientId(value.user?.clientId.toString());
+
+      Navigator.pushNamedAndRemoveUntil(
+          context, RoutesNames.homeroute, (route) => false);
+    }).onError((error, stackTrace) {
+      log(error.toString());
     });
   }
 

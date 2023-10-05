@@ -24,7 +24,7 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
       builder: (context, isVisible, _) {
         return SignupFormField(
           textInputType: TextInputType.visiblePassword,
-          validator: SignupValidation.password,
+          validator: AuthValidation.password,
           controller: widget.controller,
           obscureText: !passwordVisibility.value,
           labelText: "Password",

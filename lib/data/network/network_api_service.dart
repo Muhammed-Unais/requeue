@@ -22,7 +22,7 @@ class NetWorkApiService implements BaseApiService {
         headers: {HttpHeaders.contentTypeHeader: "application/json"},
       );
 
-      Map<String, dynamic>? data = returnResponse(response);
+      var data = returnResponse(response);
       return data;
     } catch (e) {
       log(e.toString());
@@ -42,7 +42,7 @@ class NetWorkApiService implements BaseApiService {
 
       switch (response.statusCode) {
         case 200:
-          return body;
+          return response.body;
         case 400:
           throw BadRequestException(message, response.statusCode);
         case 401:

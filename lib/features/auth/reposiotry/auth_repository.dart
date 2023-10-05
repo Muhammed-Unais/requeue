@@ -10,9 +10,20 @@ class AuthRepository {
   Future<UserModel> signupPostApi(dynamic body) async {
     try {
       dynamic response =await apiService.getPostApiResponse(AppUrl.signUpUrl, body);
-      return UserModel.fromJson(response);
+      return userModelFromJson(response);
     } catch (e) {
       rethrow;
     }
   }
+
+  Future<UserModel> loginPostApi(dynamic body) async {
+    try {
+      dynamic response =await apiService.getPostApiResponse(AppUrl.loginUrl, body);
+      return userModelFromJson(response);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+
 }

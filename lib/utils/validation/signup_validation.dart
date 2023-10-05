@@ -1,6 +1,6 @@
 import 'package:email_validator/email_validator.dart';
 
-class SignupValidation {
+class AuthValidation {
   static String? password(String? value) {
     String pattern =
         r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
