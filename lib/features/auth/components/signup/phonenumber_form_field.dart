@@ -1,6 +1,7 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:requeue/res/components/authformfield.dart';
+import 'package:requeue/features/auth/components/signup/signup_formfield.dart';
+import 'package:requeue/res/constants/app_colors.dart';
 
 class PhoneNumberFormField extends StatefulWidget {
   const PhoneNumberFormField({
@@ -26,7 +27,7 @@ class _PhoneNumberFormFieldState extends State<PhoneNumberFormField> {
 
   @override
   Widget build(BuildContext context) {
-    return AuthFormField(
+    return SignupFormField(
       textInputType: TextInputType.number,
       labelText: "phone",
       prefixWidget: Padding(
@@ -42,13 +43,13 @@ class _PhoneNumberFormFieldState extends State<PhoneNumberFormField> {
                 "+${phoneCode ?? 1}",
                 style: const TextStyle(
                   fontSize: 13,
-                  color: Color.fromRGBO(204, 210, 221, 1),
+                  color:AppColor.greyColor,
                 ),
               ),
             ),
             const SizedBox(width: 16,),
             const ColoredBox(
-              color: Color.fromRGBO(204, 210, 221, 1),
+              color:AppColor.greyColor,
               child: SizedBox(
                 width: 1,
                 height: 24,
@@ -60,7 +61,7 @@ class _PhoneNumberFormFieldState extends State<PhoneNumberFormField> {
       hintText: "Phone Number",
       hintStyle: const TextStyle(
         fontSize: 13,
-        color: Color.fromRGBO(204, 210, 221, 1),
+        color:AppColor.greyColor,
       ),
     );
   }

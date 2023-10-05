@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:requeue/features/auth/view/signup_screen.dart';
+import 'package:requeue/features/auth/view/login_screen.dart';
 import 'package:requeue/res/constants/app_colors.dart';
 
 void main() {
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: const SignupScreen(),
+      home: const LoginScreen(),
     );
   }
 }

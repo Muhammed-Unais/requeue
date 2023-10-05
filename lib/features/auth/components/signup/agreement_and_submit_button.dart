@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:requeue/res/components/auth_buttons.dart';
 import 'package:requeue/res/constants/app_colors.dart';
 
 class AgreementAndSubmitButton extends StatefulWidget {
@@ -77,23 +78,9 @@ class _AgreementAndSubmitButtonState extends State<AgreementAndSubmitButton> {
             builder: (context, isCheck, _) {
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: MaterialButton(
-                  textColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  disabledColor: const Color.fromRGBO(112, 112, 112, 1),
-                  color: AppColor.primaryColor,
-                  onPressed: isCheck ? () {
-                    
-                  } : null,
-                  child: const Text(
-                    "Sign Up",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontFamily: "Inter",
-                    ),
-                  ),
+                child: AuthButton(
+                  text: "Sign up",
+                  onPressed: isCheck ? () {} : null,
                 ),
               );
             },

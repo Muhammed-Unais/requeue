@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:requeue/features/auth/components/sign_up_body.dart';
+import 'package:requeue/features/auth/components/signup/sign_up_body.dart';
 import 'package:requeue/res/constants/app_colors.dart';
 
 class SignupScreen extends StatelessWidget {

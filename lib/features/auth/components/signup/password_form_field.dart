@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:requeue/res/components/authformfield.dart';
+import 'package:requeue/features/auth/components/signup/signup_formfield.dart';
+import 'package:requeue/res/constants/app_colors.dart';
 
 class PasswordFormField extends StatefulWidget {
   const PasswordFormField({
@@ -17,7 +18,7 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
     return ValueListenableBuilder(
       valueListenable: passwordVisibility,
       builder: (context,isVisible,_) {
-        return AuthFormField(
+        return SignupFormField(
           obscureText: !passwordVisibility.value,
           labelText: "Password",
           suffixIcon: Padding(
@@ -30,7 +31,7 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
                 !isVisible
                     ? Icons.visibility_outlined
                     : Icons.visibility_off_outlined,
-                color: const Color.fromRGBO(185, 186, 200, 1),
+                color:AppColor.greyColor
               ),
             ),
           ),
