@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:requeue/features/auth/view/login_screen.dart';
 import 'package:requeue/features/auth/view_model/auth_view_model.dart';
+import 'package:requeue/features/home/view/home_screen.dart';
 import 'package:requeue/res/constants/app_colors.dart';
 import 'package:requeue/utils/routes/routes.dart';
-import 'package:requeue/utils/routes/routes_name.dart';
 
 void main() {
   runApp(
@@ -30,7 +33,18 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: RoutesNames.loginroute,
+      home: FutureBuilder(
+        future: context.read<AuthViewmodelProvider>().getJwtToken(),
+        builder: (context, snapshot) {
+          log(snapshot.data.toString());
+          if (snapshot.connectionState == ConnectionState.done &&
+              snapshot.data == null) {
+            return const LoginScreen();
+          } else {
+            return const HomeScreen();
+          }
+        },
+      ),
       onGenerateRoute: Routes.genericRoute,
     );
   }

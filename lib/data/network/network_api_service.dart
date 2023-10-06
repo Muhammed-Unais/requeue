@@ -8,7 +8,24 @@ import 'package:requeue/data/network/base_api_service.dart';
 
 class NetWorkApiService implements BaseApiService {
   @override
-  Future getGetApiResponse(String url, String queries) async {}
+  Future getGetApiResponse(
+      String basseurl,
+      String endpoints,
+      Map<String, dynamic>? queryParameters,
+      Map<String, String>? headers) async {
+    Response? response;
+    
+    try {
+      final url = Uri.http(basseurl, endpoints, queryParameters);
+
+      response = await http.get(url, headers: headers);
+
+      return returnResponse(response);
+    } catch (e) {
+      log(e.toString());
+      rethrow;
+    }
+  }
 
   @override
   Future getPostApiResponse(String url, body) async {
@@ -25,7 +42,6 @@ class NetWorkApiService implements BaseApiService {
       var data = returnResponse(response);
       return data;
     } catch (e) {
-      log(e.toString());
       rethrow;
     }
   }
