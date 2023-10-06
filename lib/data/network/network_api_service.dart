@@ -14,7 +14,7 @@ class NetWorkApiService implements BaseApiService {
       Map<String, dynamic>? queryParameters,
       Map<String, String>? headers) async {
     Response? response;
-    
+
     try {
       final url = Uri.http(basseurl, endpoints, queryParameters);
 

@@ -12,9 +12,9 @@ class RestaurenRepository {
       Map<String, String>? headers) async {
     try {
       dynamic response = await baseApiService.getGetApiResponse(
-          AppUrl.baseUrl, AppUrl.restaurantAPI, queryParameters, headers);
+          AppUrl.baseUrlnohttp, AppUrl.restaurantAPI, queryParameters, headers);
 
-      return RestuarentModel.fromMap(response);
+      return restuarentModelFromMap(response);
     } catch (e) {
       rethrow;
     }

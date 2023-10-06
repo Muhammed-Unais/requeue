@@ -5,9 +5,9 @@ RestuarentModel restuarentModelFromMap(String str) => RestuarentModel.fromMap(js
 class RestuarentModel {
     String? message;
     String? currentpage;
-    int? pagelimit;
+    String? pagelimit;
     int? count;
-    List<Datum>? data;
+    List<Restaurents>? data;
     bool? status;
 
     RestuarentModel({
@@ -24,13 +24,13 @@ class RestuarentModel {
         currentpage: json["currentpage"],
         pagelimit: json["pagelimit"],
         count: json["count"],
-        data: json["data"] == null ? [] : List<Datum>.from(json["data"]!.map((x) => Datum.fromMap(x))),
+        data: json["data"] == null ? [] : List<Restaurents>.from(json["data"]!.map((x) => Restaurents.fromMap(x))),
         status: json["status"],
     );
 
 }
 
-class Datum {
+class Restaurents {
     int? id;
     String? nameEn;
     String? nameAr;
@@ -105,7 +105,7 @@ class Datum {
     String? foodTypeEn;
     String? foodTypeAr;
 
-    Datum({
+    Restaurents({
         this.id,
         this.nameEn,
         this.nameAr,
@@ -181,7 +181,7 @@ class Datum {
         this.foodTypeAr,
     });
 
-    factory Datum.fromMap(Map<String, dynamic> json) => Datum(
+    factory Restaurents.fromMap(Map<String, dynamic> json) => Restaurents(
         id: json["id"],
         nameEn: json["name_en"],
         nameAr: json["name_ar"],

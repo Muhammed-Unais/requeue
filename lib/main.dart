@@ -1,20 +1,26 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:requeue/features/auth/view/login_screen.dart';
 import 'package:requeue/features/auth/view_model/auth_view_model.dart';
 import 'package:requeue/features/home/view/home_screen.dart';
+import 'package:requeue/features/home/view_model/restaurent_viewmodel_provider.dart';
 import 'package:requeue/res/constants/app_colors.dart';
 import 'package:requeue/utils/routes/routes.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(
           create: (context) {
             return AuthViewmodelProvider();
+          },
+        ),
+        ChangeNotifierProvider(
+          create: (context) {
+            return RestaurantViewModelProvider();
           },
         )
       ],

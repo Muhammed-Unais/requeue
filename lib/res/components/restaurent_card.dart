@@ -2,11 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:requeue/res/constants/ksize.dart';
 
 class RestarentCard extends StatelessWidget {
-  const RestarentCard({super.key});
+  const RestarentCard(
+      {super.key, required this.image, required this.titile, this.rating});
+
+  final String? image;
+  final String? titile;
+  final double? rating;
 
   @override
   Widget build(BuildContext context) {
     return Card(
+      margin: const EdgeInsets.only(bottom: 15),
       shadowColor: Colors.white,
       surfaceTintColor: Colors.white,
       elevation: 2,
@@ -20,19 +26,26 @@ class RestarentCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
           color: Colors.white,
         ),
-        child: const Row(
+        child: Row(
           children: [
             Expanded(
               flex: 2,
               child: Card(
-                child: Image(
-                  image: AssetImage(
-                    "assets/images/rq-logo-OMAR-WHITE.png",
-                  ),
-                ),
+                surfaceTintColor: Colors.white,
+                child: image == null || image!.isEmpty
+                    ? Image.asset(
+                        "assets/images/rq-logo-OMAR-WHITE.png",
+                        height: 100,
+                      )
+                    : Image(
+                        height: 100,
+                        image: NetworkImage(
+                          "https://cdn.requeue.net/media/logos/$image",
+                        ),
+                      ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
             Expanded(
@@ -42,8 +55,8 @@ class RestarentCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Some title text",
-                    style: TextStyle(
+                    titile ?? "No titile",
+                    style: const TextStyle(
                       fontFamily: "Inter",
                       fontSize: 18,
                       color: Colors.black,
@@ -51,7 +64,7 @@ class RestarentCard extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                   Ksize.kfiveH,
-                  Text(
+                  const Text(
                     "subtitle",
                     style: TextStyle(
                       fontFamily: "Inter",
@@ -61,7 +74,7 @@ class RestarentCard extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                   Ksize.kfiveH,
-                  Text(
+                  const Text(
                     "staus text",
                     style: TextStyle(
                       fontFamily: "Inter",
@@ -82,11 +95,20 @@ class RestarentCard extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.star,
                         color: Colors.yellow,
+                        size: 16,
                       ),
-                      Text("4.5")
+                      Text(
+                        rating ==null ?0.0.toString() :rating.toString(),
+                        style: const TextStyle(
+                          fontFamily: "Inter",
+                          fontSize: 12,
+                          color: Colors.black,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      )
                     ],
                   ),
                 ],

@@ -14,97 +14,89 @@ class HomeFrosetedGlass extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Positioned(
-          top: 10,
-          left: 10,
-          right: 10,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: Container(
-              height: size.height * 0.1,
-              width: size.width,
-              color: Colors.transparent,
-              child: Stack(
-                children: [
-                  BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 7.0, sigmaY: 7.0),
-                    child: Container(),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.10),
-                        )
-                      ],
-                      borderRadius: BorderRadius.circular(10),
-                      gradient: LinearGradient(
-                        begin: Alignment.centerLeft,
-                        end: Alignment.centerRight,
-                        colors: [
-                          Colors.white.withOpacity(0.5),
-                          Colors.white.withOpacity(0.5)
-                        ],
-                      ),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: GestureDetector(
-                      onTap: () {
-                        showModalBottomSheet(
-                          isScrollControlled: true,
-                          backgroundColor: Colors.transparent,
-                          context: context,
-                          builder: (context) {
-                            return const HomeDragabbleScrollabeSheet();
-                          },
-                        );
-                      },
-                      child: Container(
-                        margin:const EdgeInsets.only(left: 30),
-                        padding: const EdgeInsets.all(4),
-                        height: 50,
-                        width: 50,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Color.fromRGBO(255, 255, 255, 1),
-                        ),
-                        child:
-                        Container(
-                          height: 38,
-                          width: 38,
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: AppColor.primaryColor,
-                          ),
-                          child: const Icon(
-                           Icons.menu_rounded,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Ksize.ktenW,
-                  const Center(
-                    child: Text(
-                      "Restaurants",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontFamily: "Inter",
-                      ),
-                    ),
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(10),
+      child: Container(
+        margin: const EdgeInsets.only(left: 10,right: 10,top: 10),
+        height: size.height * 0.1,
+        width: size.width,
+        color: Colors.transparent,
+        child: Stack(
+          children: [
+            BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 7.0, sigmaY: 7.0),
+              child: Container(),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.10),
                   )
                 ],
+                borderRadius: BorderRadius.circular(10),
+                gradient: LinearGradient(
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                  colors: [
+                    Colors.white.withOpacity(0.5),
+                    Colors.white.withOpacity(0.5)
+                  ],
+                ),
               ),
             ),
-          ),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: GestureDetector(
+                onTap: () {
+                  showModalBottomSheet(
+                    isScrollControlled: true,
+                    backgroundColor: Colors.transparent,
+                    context: context,
+                    builder: (context) {
+                      return const HomeDragabbleScrollabeSheet();
+                    },
+                  );
+                },
+                child: Container(
+                  margin:const EdgeInsets.only(left: 30),
+                  padding: const EdgeInsets.all(4),
+                  height: 50,
+                  width: 50,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Color.fromRGBO(255, 255, 255, 1),
+                  ),
+                  child:
+                  Container(
+                    height: 38,
+                    width: 38,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: AppColor.primaryColor,
+                    ),
+                    child: const Icon(
+                     Icons.menu_rounded,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Ksize.ktenW,
+            const Center(
+              child: Text(
+                "Restaurants",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontFamily: "Inter",
+                ),
+              ),
+            )
+          ],
         ),
-      ],
+      ),
     );
   }
 }
