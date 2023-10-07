@@ -6,4 +6,6 @@ class AppUrl {
   static const loginUrl = "$baseUrl/user/auth/login";
 
   static const restaurantAPI = "user/mainpages/get-restaurants";
+
+  static const profileUrl = "user/profiles/get-profiles";
 }

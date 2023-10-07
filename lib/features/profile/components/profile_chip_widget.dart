@@ -1,59 +1,59 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:requeue/features/home/view_model/restaurent_viewmodel_provider.dart';
+import 'package:requeue/features/profile/view_model/profile_viewmodel_provider.dart';
 import 'package:requeue/res/components/chip_widget.dart';
 import 'package:requeue/res/constants/app_colors.dart';
 
-class HomeTopChip extends StatefulWidget {
-  const HomeTopChip({
+class ProfileChipWidget extends StatefulWidget {
+  const ProfileChipWidget({
     super.key,
   });
 
   @override
-  State<HomeTopChip> createState() => _HomeTopChipState();
+  State<ProfileChipWidget> createState() => _ProfileChipWidgetState();
 }
 
-class _HomeTopChipState extends State<HomeTopChip> {
+class _ProfileChipWidgetState extends State<ProfileChipWidget> {
   late List<String> chipNames;
-  late RestaurantViewModelProvider restuarentProvider;
+  late ProfileViewModelProvider profileProvider;
 
   @override
   void initState() {
-    restuarentProvider = context.read<RestaurantViewModelProvider>();
-    chipNames = restuarentProvider.chipNames;
-    restuarentProvider.selcetedChip = chipNames[0];
-    restuarentProvider.homeChip = HomeChip.dinein;
+    profileProvider = context.read<ProfileViewModelProvider>();
+    chipNames = profileProvider.chipNames;
+    profileProvider.selectedChip = chipNames[0];
+    profileProvider.profileChip = ProfileChip.rates;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    restuarentProvider = context.watch<RestaurantViewModelProvider>();
+    profileProvider = context.watch<ProfileViewModelProvider>();
     return SizedBox(
-      height:  80,
+      height: 60,
       child: ListView.builder(
         shrinkWrap: true,
-        padding: const EdgeInsetsDirectional.symmetric(horizontal: 20),
+        padding: const EdgeInsetsDirectional.symmetric(horizontal: 10),
         scrollDirection: Axis.horizontal,
         itemCount: chipNames.length,
         itemBuilder: (context, index) {
           final chipName = chipNames[index];
           return GestureDetector(
             onTap: () {
-              restuarentProvider.seHomeChipValue(chipName);
+              profileProvider.setChipValu(chipName);
             },
             child: Padding(
-              padding: const EdgeInsets.only(right: 30),
+              padding: const EdgeInsets.only(right: 20),
               child: ChipWidget(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: 32,
-                  vertical: 16,
+                  horizontal: 24,
+                  vertical: 12,
                 ),
                 label: chipName,
-                backgroundColor: restuarentProvider.selcetedChip == chipName
+                backgroundColor: profileProvider.selectedChip == chipName
                     ? AppColor.primaryColor
                     : Colors.white,
-                labeColor: restuarentProvider.selcetedChip == chipName
+                labeColor: profileProvider.selectedChip == chipName
                     ? Colors.white
                     : Colors.black,
               ),

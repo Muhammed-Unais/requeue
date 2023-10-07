@@ -3,6 +3,7 @@ import 'package:requeue/features/auth/view/login_screen.dart';
 import 'package:requeue/features/auth/view/signup_screen.dart';
 import 'package:requeue/features/auth/view_model/auth_view_model.dart';
 import 'package:requeue/features/home/view/home_screen.dart';
+import 'package:requeue/features/profile/view/profile_screen.dart';
 import 'package:requeue/utils/routes/routes_name.dart';
 
 class Routes {
@@ -27,6 +28,12 @@ class Routes {
         return MaterialPageRoute(
           builder: (context) {
             return const HomeScreen();
+          },
+        );
+      case RoutesNames.profileRoute:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const ProfileScreen();
           },
         );
       default:

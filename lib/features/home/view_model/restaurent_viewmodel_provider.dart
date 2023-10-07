@@ -82,7 +82,6 @@ class RestaurantViewModelProvider with ChangeNotifier {
 
     Map<String, String>? headers = {"userToken": userToken.toString()};
     await _myrepo.getAllRestuarents(queryParameters, headers).then((value) {
-      // pickedUPrestuarentModel = value;
       restaurents = value.data;
     }).onError((error, stackTrace) {});
 
@@ -90,7 +89,10 @@ class RestaurantViewModelProvider with ChangeNotifier {
   }
 
   Future getAlldineinRestaurent({required BuildContext context}) async {
-    var userToken = context.read<AuthViewmodelProvider>().token;
+    var authProvider = context.read<AuthViewmodelProvider>();
+
+    await authProvider.getJwtToken();
+    var userToken = authProvider.token;
 
     setAlldineinRestuarent(ApiResponse.loading());
 

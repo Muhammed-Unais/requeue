@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:requeue/res/components/menu_listtale.dart';
+import 'package:requeue/utils/routes/routes_name.dart';
 
 class HomeDragabbleScrollabeSheet extends StatelessWidget {
   const HomeDragabbleScrollabeSheet({
@@ -76,7 +77,12 @@ class HomeDragabbleScrollabeSheet extends StatelessWidget {
                   Navigator.pop(context);
                 },
               ),
-              const MenuListTale(titile: "View Profile"),
+              MenuListTale(
+                titile: "View Profile",
+                onTap: () {
+                  Navigator.pushNamed(context, RoutesNames.profileRoute);
+                },
+              ),
             ],
           ),
         );

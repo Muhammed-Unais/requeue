@@ -1,28 +1,29 @@
 import 'package:flutter/material.dart';
 
-class HomeChipWidget extends StatelessWidget {
-  const HomeChipWidget({
+class ChipWidget extends StatelessWidget {
+  const ChipWidget({
     super.key,
     required this.label,
     this.backgroundColor,
-    this.labeColor,
+    this.labeColor, this.padding,
   });
 
   final String label;
   final Color? backgroundColor;
   final Color? labeColor;
+  final EdgeInsetsGeometry? padding;
 
   @override
   Widget build(BuildContext context) {
     return Chip(
-      elevation: 10,
+      shadowColor: Colors.white,
+      surfaceTintColor: Colors.white,
+      elevation: 5,
       side: const BorderSide(
+        width: 0.1,
         color: Colors.white,
       ),
-      padding: const EdgeInsets.symmetric(
-        horizontal: 32,
-        vertical: 16,
-      ),
+      padding:padding,
       backgroundColor: backgroundColor,
       label: Text(label),
       labelStyle: TextStyle(

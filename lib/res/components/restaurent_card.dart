@@ -17,13 +17,13 @@ class RestarentCard extends StatelessWidget {
       surfaceTintColor: Colors.white,
       elevation: 2,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Container(
         padding: const EdgeInsetsDirectional.all(10),
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(10),
           color: Colors.white,
         ),
         child: Row(
@@ -31,6 +31,9 @@ class RestarentCard extends StatelessWidget {
             Expanded(
               flex: 2,
               child: Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
                 surfaceTintColor: Colors.white,
                 child: image == null || image!.isEmpty
                     ? Image.asset(
@@ -101,7 +104,7 @@ class RestarentCard extends StatelessWidget {
                         size: 16,
                       ),
                       Text(
-                        rating ==null ?0.0.toString() :rating.toString(),
+                        rating == null ? 0.0.toString() : rating.toString(),
                         style: const TextStyle(
                           fontFamily: "Inter",
                           fontSize: 12,
