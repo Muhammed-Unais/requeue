@@ -134,4 +134,9 @@ class RestaurantViewModelProvider with ChangeNotifier {
     }).onError((error, stackTrace) {});
     return restaurents;
   }
+
+  void clearAllData() {
+    pickedrestaurantResponse.data = null;
+    dineinrestaurantResponse.data = null;
+  }
 }

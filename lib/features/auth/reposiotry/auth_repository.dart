@@ -1,5 +1,6 @@
 import 'package:requeue/data/network/base_api_service.dart';
 import 'package:requeue/features/auth/model/user_model.dart';
+import 'package:requeue/features/auth/model/user_model_login.dart';
 import 'package:requeue/res/app_url.dart';
 
 class AuthRepository {
@@ -17,11 +18,12 @@ class AuthRepository {
     }
   }
 
-  Future<UserModel> loginPostApi(dynamic body) async {
+  Future<UserModelLogin> loginPostApi(dynamic body) async {
     try {
       dynamic response =
           await apiService.getPostApiResponse(AppUrl.loginUrl, body);
-      return userModelFromJson(response);
+    
+      return userModelLoginFromJson(response);
     } catch (e) {
       rethrow;
     }

@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:requeue/features/auth/view_model/auth_view_model.dart';
+import 'package:requeue/features/home/components/user_name_and_profile.dart';
+import 'package:requeue/features/home/view_model/restaurent_viewmodel_provider.dart';
 import 'package:requeue/res/components/menu_listtale.dart';
 import 'package:requeue/utils/routes/routes_name.dart';
+import 'package:requeue/utils/utils.dart';
 
 class HomeDragabbleScrollabeSheet extends StatelessWidget {
   const HomeDragabbleScrollabeSheet({
     super.key,
+    required this.authViewmodelProvider,
   });
+
+  final AuthViewmodelProvider authViewmodelProvider;
 
   @override
   Widget build(BuildContext context) {
@@ -29,62 +37,91 @@ class HomeDragabbleScrollabeSheet extends StatelessWidget {
             left: 10,
             right: 10,
           ),
-          child: ListView(
-            controller: controller,
-            children: [
-              const Padding(
-                padding: EdgeInsets.only(
-                  left: 150,
-                  right: 150,
-                  top: 15,
-                  bottom: 20,
+          child: authViewmodelProvider.token != null
+              ? ListView(
+                  controller: controller,
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.only(
+                        left: 150,
+                        right: 150,
+                        top: 15,
+                        bottom: 20,
+                      ),
+                      child: Divider(
+                        thickness: 1.5,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const UserNameAndProfile(),
+                    const Padding(
+                      padding: EdgeInsets.only(left: 10, right: 10),
+                      child: Divider(),
+                    ),
+                    MenuListTale(
+                      titile: "View Restaurants",
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                    MenuListTale(
+                      titile: "View Profile",
+                      onTap: () {
+                        Navigator.pushNamed(context, RoutesNames.profileRoute);
+                      },
+                    ),
+                    MenuListTale(
+                      titile: "Logout",
+                      onTap: () async {
+                        Utils.showLogoutDialog(
+                          context,
+                          onPressed: () async {
+                            await authViewmodelProvider.logoutUser(context);
+                          },
+                        );
+                      },
+                    ),
+                  ],
+                )
+              : Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Center(
+                      child: Text(
+                        "You dont have account",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontFamily: "Inter",
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    Center(
+                      child: TextButton(
+                        onPressed: () {
+                          context
+                              .read<RestaurantViewModelProvider>()
+                              .clearAllData();
+                          Navigator.pushNamedAndRemoveUntil(
+                            context,
+                            RoutesNames.loginroute,
+                            (route) => false,
+                          );
+                        },
+                        child: const Text(
+                          "Create a new account or login",
+                          style: TextStyle(
+                            decoration: TextDecoration.underline,
+                            decorationColor: Colors.white,
+                            fontSize: 16,
+                            fontFamily: "Inter",
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
                 ),
-                child: Divider(
-                  thickness: 1.5,
-                  color: Colors.white,
-                ),
-              ),
-              const ListTile(
-                leading: CircleAvatar(
-                  radius: 36,
-                  backgroundImage:
-                      AssetImage("assets/images/rq-logo-OMAR-WHITE.png"),
-                ),
-                title: Text(
-                  "Welcome",
-                  style: TextStyle(
-                    fontFamily: "Inter",
-                    fontSize: 12,
-                    color: Colors.white,
-                  ),
-                ),
-                subtitle: Text(
-                  "Yousuf bunashi",
-                  style: TextStyle(
-                    fontFamily: "Inter",
-                    fontSize: 19,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-              const Padding(
-                padding: EdgeInsets.only(left: 10, right: 10),
-                child: Divider(),
-              ),
-              MenuListTale(
-                titile: "View Restaurants",
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              MenuListTale(
-                titile: "View Profile",
-                onTap: () {
-                  Navigator.pushNamed(context, RoutesNames.profileRoute);
-                },
-              ),
-            ],
-          ),
         );
       },
     );

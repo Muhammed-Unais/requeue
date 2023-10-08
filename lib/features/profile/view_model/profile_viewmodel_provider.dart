@@ -61,4 +61,8 @@ class ProfileViewModelProvider with ChangeNotifier {
       setProfileApiResponse(ApiResponse.error(error.toString()));
     });
   }
+
+  void clearAllData() {
+    profileApiRespose.data = null;
+  }
 }

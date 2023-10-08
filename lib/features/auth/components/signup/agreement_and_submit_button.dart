@@ -80,23 +80,25 @@ class _AgreementAndSubmitButtonState extends State<AgreementAndSubmitButton> {
             builder: (context, isCheck, _) {
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: AuthButton(
-                  text: "Sign up",
-                  onPressed: isCheck
-                      ? () {
-                          var authViewModelProvider =
-                              context.read<AuthViewmodelProvider>();
-                          var isValid = authViewModelProvider
-                              .formKey.currentState!
-                              .validate();
-                          if (!isValid ||
-                              authViewModelProvider.countryPhoneCode == null) {
-                            return;
-                          } else {
-                            authViewModelProvider.signUpPostApi(context);
-                          }
-                        }
-                      : null,
+                child: Consumer<AuthViewmodelProvider>(
+                  builder: (context, provider, _) {
+                    return AuthButton(
+                      isLoading: provider.isSignup,
+                      text: "Sign up",
+                      onPressed: isCheck
+                          ? () {
+                              var isValid =
+                                  provider.formKey.currentState!.validate();
+                              if (!isValid ||
+                                  provider.countryPhoneCode == null) {
+                                return;
+                              } else {
+                                provider.signUpPostApi(context);
+                              }
+                            }
+                          : null,
+                    );
+                  },
                 ),
               );
             },

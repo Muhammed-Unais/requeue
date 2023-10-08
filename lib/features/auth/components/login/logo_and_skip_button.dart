@@ -1,4 +1,6 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:requeue/utils/routes/routes_name.dart';
 
 class LogoAndSkipButton extends StatelessWidget {
   const LogoAndSkipButton({
@@ -21,7 +23,13 @@ class LogoAndSkipButton extends StatelessWidget {
           right: 0,
           top: 10,
           child: TextButton(
-            onPressed: () {},
+            onPressed: () {
+              log("worked");
+              Navigator.pushReplacementNamed(
+                context,
+                RoutesNames.homeroute,
+              );
+            },
             child: const Row(
               children: [
                 Text(
@@ -32,7 +40,9 @@ class LogoAndSkipButton extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-                SizedBox(width: 5,),
+                SizedBox(
+                  width: 5,
+                ),
                 Icon(
                   Icons.arrow_forward_ios_rounded,
                   size: 20,

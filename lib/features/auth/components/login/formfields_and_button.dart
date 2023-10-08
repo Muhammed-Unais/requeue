@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:requeue/features/auth/components/login/login_formfield.dart';
@@ -97,28 +95,26 @@ class _FormFieldsAndButtonState extends State<FormFieldsAndButton> {
               SizedBox(
                 width: widget.size.width,
                 height: widget.size.height * 0.06,
-                child: AuthButton(
-                  text: "Login",
-                  onPressed: () {
-                    log("Called1");
-                    var isValid = _formkey.currentState!.validate();
-
-                    if (!isValid) {
-                    log("Called2");
-
-                      return;
-                    } else {
-                    log("Called3");
-
-                      Map<String, dynamic> userData = {
-                        "phone_number": int.parse(phoneController.text),
-                        "password": passwordController.text
-                      };
-                      context
-                          .read<AuthViewmodelProvider>()
-                          .loginApi(userData, context);
-                    }
-                  },
+                child: Consumer<AuthViewmodelProvider>(
+                  builder: (context,provider,_) {
+                    return AuthButton(
+                      isLoading: provider.islogin,
+                      text: "Login",
+                      onPressed: () async{
+                        var isValid = _formkey.currentState!.validate();
+                        if (!isValid) {
+                          return;
+                        } else {
+                          Map<String, dynamic> userData = {
+                            "phone_number": int.parse(phoneController.text),
+                            "password": passwordController.text
+                          };
+                         provider
+                              .loginApi(userData, context);
+                        }
+                      },
+                    );
+                  }
                 ),
               ),
             ],

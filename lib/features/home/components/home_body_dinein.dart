@@ -57,10 +57,10 @@ class _HomeBodyDiniInState extends State<HomeBodyDiniIn> {
     });
   }
 
-  void getAllRestuarents() {
+  void getAllRestuarents() async{
     restuarenProvider = context.read<RestaurantViewModelProvider>();
     dineInrestuarents ??
-        restuarenProvider.getAlldineinRestaurent(context: context);
+        restuarenProvider.getAlldineinRestaurent(context: context);    
   }
 
   Future<void> dineInpagination() async {

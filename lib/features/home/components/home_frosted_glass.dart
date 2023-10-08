@@ -1,6 +1,9 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:requeue/features/auth/view_model/auth_view_model.dart';
 import 'package:requeue/features/home/components/home_dragblescrollable_sheet.dart';
+import 'package:requeue/features/profile/view_model/profile_viewmodel_provider.dart';
 import 'package:requeue/res/constants/app_colors.dart';
 import 'package:requeue/res/constants/ksize.dart';
 
@@ -17,7 +20,7 @@ class HomeFrosetedGlass extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: Container(
-        margin: const EdgeInsets.only(left: 10,right: 10,top: 10),
+        margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
         height: size.height * 0.1,
         width: size.width,
         color: Colors.transparent,
@@ -49,17 +52,26 @@ class HomeFrosetedGlass extends StatelessWidget {
               alignment: Alignment.centerLeft,
               child: GestureDetector(
                 onTap: () {
+                  var authProvider = context.read<AuthViewmodelProvider>();
+                  if (authProvider.token != null) {
+                    var profileProvider =
+                        context.read<ProfileViewModelProvider>();
+                    profileProvider.profileApiRespose.data ??
+                        profileProvider.getUserProfiel(context: context);
+                  }
                   showModalBottomSheet(
                     isScrollControlled: true,
                     backgroundColor: Colors.transparent,
                     context: context,
                     builder: (context) {
-                      return const HomeDragabbleScrollabeSheet();
+                      return HomeDragabbleScrollabeSheet(
+                        authViewmodelProvider: authProvider,
+                      );
                     },
                   );
                 },
                 child: Container(
-                  margin:const EdgeInsets.only(left: 30),
+                  margin: const EdgeInsets.only(left: 30),
                   padding: const EdgeInsets.all(4),
                   height: 50,
                   width: 50,
@@ -67,8 +79,7 @@ class HomeFrosetedGlass extends StatelessWidget {
                     shape: BoxShape.circle,
                     color: Color.fromRGBO(255, 255, 255, 1),
                   ),
-                  child:
-                  Container(
+                  child: Container(
                     height: 38,
                     width: 38,
                     decoration: const BoxDecoration(
@@ -76,7 +87,7 @@ class HomeFrosetedGlass extends StatelessWidget {
                       color: AppColor.primaryColor,
                     ),
                     child: const Icon(
-                     Icons.menu_rounded,
+                      Icons.menu_rounded,
                       color: Colors.white,
                     ),
                   ),

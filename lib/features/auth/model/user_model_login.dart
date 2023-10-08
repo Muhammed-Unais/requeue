@@ -1,29 +1,29 @@
 import 'dart:convert';
 
-UserModel userModelFromJson(String str) {
+UserModelLogin userModelLoginFromJson(String str) {
   final jsonData = json.decode(str);
-  return UserModel.fromJson(jsonData);
+  return UserModelLogin.fromJson(jsonData);
 }
 
-class UserModel {
+class UserModelLogin {
   String? message;
   User? user;
   String? token;
 
-  UserModel({
+  UserModelLogin({
     this.message,
     required this.user,
     required this.token,
   });
 
-  factory UserModel.fromJson(Map<String, dynamic> json) {
+  factory UserModelLogin.fromJson(Map<String, dynamic> json) {
     String? newMessage;
     if (json.containsKey("message")) {
       newMessage = json["message"];
     }
-    return UserModel(
+    return UserModelLogin(
       message: newMessage,
-      user: json["User"] == null ? null : User.fromJson(json["User"]),
+      user: json["user"] == null ? null : User.fromJson(json["user"]),
       token: json["token"],
     );
   }
@@ -58,4 +58,3 @@ class User {
         clientId: json["client_id"],
       );
 }
-
